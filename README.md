@@ -1,1 +1,1 @@
-Resr controller
+Rest controller
