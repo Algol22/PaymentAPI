@@ -44,4 +44,20 @@ The request body should be sent as raw JSON. Below is the structure of the JSON 
     "payer_ip": "23.129.64.182",
     "term_url_3ds": "https://asdf.com"
 }
+```
 
+#### Decline Reason
+```json
+{
+    "error_code": 204007,
+    "error_message": "Day MID limit is not set or exceeded."
+}
+```
+
+#### Decline Reason
+```json
+{
+    "error_code": 100000,
+    "error_message": "client_key: This is not a valid UUID."
+}
+```
