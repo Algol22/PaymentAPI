@@ -10,22 +10,7 @@ class RequestSender
 {
     public function sendPaymentRequest($postData)
     {
-        try {
-            // Validate required fields
-            $requiredFields = [
-                'action', 'client_key', 'order_amount', 'order_currency', 'order_description',
-                'card_number', 'card_exp_month', 'card_exp_year', 'card_cvv2', 'payer_first_name',
-                'payer_last_name', 'payer_address', 'payer_country', 'payer_state', 'payer_city',
-                'payer_zip', 'payer_email', 'payer_phone', 'payer_ip', 'term_url_3ds'
-            ];
 
-            foreach ($requiredFields as $field) {
-                if (!isset($postData[$field])) {
-                    header('Content-Type: application/json');
-
-                    throw new InvalidArgumentException('Missing required field: ' . $field);
-                }
-            }
 
             // Convert order_amount to float if it's not already
             $orderAmount = $postData['order_amount'];
@@ -122,16 +107,7 @@ class RequestSender
                 );
             }
 
-        } catch (Exception $e) {
-            // Handle other errors
-            $errorResponse = [
-                'result' => 'ERROR',
-                'error_code' => 500,
-                'error_message' => $e->getMessage()
-            ];
-            http_response_code(500);
-            echo json_encode($errorResponse);
-        }
+
     }
 
 }
