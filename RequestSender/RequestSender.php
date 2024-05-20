@@ -21,6 +21,8 @@ class RequestSender
 
             foreach ($requiredFields as $field) {
                 if (!isset($postData[$field])) {
+                    header('Content-Type: application/json');
+
                     throw new InvalidArgumentException('Missing required field: ' . $field);
                 }
             }
@@ -68,12 +70,44 @@ class RequestSender
             $response->sendPayment($payerData);
 
 
-            if ($response->getRequestStatus()=="failed") {
+            if (!$response->getRequestStatus()) {
 
-                echo $response->getRequestStatus();
-                echo $response->getDeclineReason();
+                header('Content-Type: application/json');
+
+
+
+                $responseJson = $response->getDeclineReason(); // Assuming getDeclineReason() returns JSON string
+
+
+                $responseArray = json_decode($responseJson, true);
+
+
+                $responseProcessed = [];
+
+                if ($responseArray !== null && isset($responseArray['error_code']) && isset($responseArray['error_message'])) {
+                    // Check if "errors" array is present and not empty
+                    if (isset($responseArray['errors']) && !empty($responseArray['errors'])) {
+                        // Extract error details from the first error in the "errors" array
+                        $errorCode = $responseArray['errors'][0]['error_code'];
+                        $errorMessage = $responseArray['errors'][0]['error_message'];
+                    } else {
+                        // Extract error details from the main response
+                        $errorCode = $responseArray['error_code'];
+                        $errorMessage = $responseArray['error_message'];
+                    }
+                    // Add the error details to the response array
+                    $responseProcessed['error_code'] = $errorCode;
+                    $responseProcessed['error_message'] = $errorMessage;
+                }
+
+
+                $jsonResponseProcessed = json_encode($responseProcessed);
+
+
+                echo $jsonResponseProcessed;
 
             } else {
+                echo $response->getRequestStatusCode();
                 // Parse the response JSON and return an instance of PaymentResponseDTO
                 $responseData = json_decode($response, true);
                 header('Content-Type: application/json');

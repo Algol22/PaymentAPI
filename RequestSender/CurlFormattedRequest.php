@@ -2,6 +2,8 @@
 class CurlFormattedRequest
 {
     private $requestStatus;
+
+    private $requestStatusCode;
     private $declineReason;
     public function sendPayment($payerData)
     {
@@ -40,14 +42,15 @@ class CurlFormattedRequest
         if (substr($httpCode, 0, 1) != '2') {
             // Status code does not start with '2'
 
-            $this->setRequestStatus("failed");
+            $this->setRequestStatus(false);
             $this->setDeclineReason($response);
 
         } else {
             // Status code starts with '2'
-            $this->setRequestStatus("success");
+            $this->setRequestStatus(true);
         }
 
+        $this->setRequestStatusCode($httpCode);
         curl_close($curl);
 
         return $response !== false ? $requestStatus.$response : $requestStatus;
@@ -83,6 +86,22 @@ class CurlFormattedRequest
     public function setDeclineReason($declineReason)
     {
         $this->declineReason = $declineReason;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRequestStatusCode()
+    {
+        return $this->requestStatusCode;
+    }
+
+    /**
+     * @param mixed $requestStatusCode
+     */
+    public function setRequestStatusCode($requestStatusCode)
+    {
+        $this->requestStatusCode = $requestStatusCode;
     }
 }
 ?>
