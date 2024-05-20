@@ -46,7 +46,7 @@ The request body should be sent as raw JSON. Below is the structure of the JSON 
 }
 ```
 
-#### Success
+#### Success Response
 ```json
 {
     "provider": "Andrii's payment solutions",
