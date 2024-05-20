@@ -25,7 +25,7 @@ class CurlFormattedRequest
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_HTTPHEADER => [
                 "Content-Type: multipart/form-data; boundary=$boundary",
-                "Cookie: PHPSESSID=nnkb917rv0kr8rneop0imvm29l"
+                "Cookie: PHPSESSID=e6fe2o6tj78obt6odbt7ageikk"
             ],
             CURLOPT_POSTFIELDS => $content
         ];
@@ -41,6 +41,7 @@ class CurlFormattedRequest
             // Status code does not start with '2'
 
             $this->setRequestStatus("failed");
+            $this->setDeclineReason($response);
 
         } else {
             // Status code starts with '2'

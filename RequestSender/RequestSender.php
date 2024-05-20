@@ -64,17 +64,18 @@ class RequestSender
             ]);
 
             // Send the payment request
-            $response = (new CurlFormattedRequest())->sendPayment($payerData);
-        echo $response;
+            $response = (new CurlFormattedRequest());
+            $response->sendPayment($payerData);
 
-            // Handle response
-            $responseData = json_decode($response, true);
-            if ($response->getRequestStatus()) {
-                throw new Exception('Failed to send payment request');
+
+            if ($response->getRequestStatus()=="failed") {
+
+                echo $response->getRequestStatus();
+                echo $response->getDeclineReason();
 
             } else {
                 // Parse the response JSON and return an instance of PaymentResponseDTO
-
+                $responseData = json_decode($response, true);
                 header('Content-Type: application/json');
 
                 echo new PaymentResponse(
