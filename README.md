@@ -46,6 +46,21 @@ The request body should be sent as raw JSON. Below is the structure of the JSON 
 }
 ```
 
+#### Success Response
+```json
+{
+    "provider": "Andrii's payment solutions",
+    "action": "SALE",
+    "status": "success",
+    "transId": "5b6492f0-f8f5-11ea-976a-0242c0a85007",
+    "trans_date": "2024-05-16 18:10:45",
+    "descriptor": "Descriptor",
+    "amount": "1.60",
+    "currency": "USD"
+}
+```
+
+
 #### Decline Reason
 ```json
 {
