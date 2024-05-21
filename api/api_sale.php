@@ -25,15 +25,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
 
-        $paymentService = new RequestSender();
-        $paymentService->sendPaymentRequest($postData);
+            $paymentService = new RequestSender();
+            $paymentService->sendPaymentRequest($postData);
 
 
         } catch (Exception $e) {
             // Handle other errors
             $errorResponse = [
                 'result' => 'ERROR',
-                'error_code' => 200,
                 'error_message' => $e->getMessage()
             ];
             http_response_code(200);

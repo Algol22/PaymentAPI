@@ -50,6 +50,7 @@ class RequestSender
                 'hash' => generateHash($postData['payer_email'], API_KEY, $postData['card_number'])
             ]);
 
+
             // Send the payment request
             $response = (new CurlFormattedRequest());
             $response->sendPayment($payerData);
@@ -92,9 +93,9 @@ class RequestSender
                 echo $jsonResponseProcessed;
 
             } else {
-                echo $response->getRequestStatusCode();
+
                 // Parse the response JSON and return an instance of PaymentResponseDTO
-                $responseData = json_decode($response, true);
+                $responseData = json_decode($response->getResponseBody(), true);
                 header('Content-Type: application/json');
 
                 echo new PaymentResponse(
