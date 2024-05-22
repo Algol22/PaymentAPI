@@ -1,5 +1,9 @@
 ##### Docker php + Apache images <br/>
 
+`0.92% duplicated lines out of 123922 total lines of code.`
+`Average size of duplication is 45 lines, largest clone has 131 of lines`
+
+
 #### unix:
 ` docker run -d -p 8080:80 --name my-apache-php-app -v "$PWD":/var/www/html php:apache `
 
