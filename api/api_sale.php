@@ -56,7 +56,7 @@ class ApiSale {
     private function sendJsonError($message, $httpCode = 200) {
         http_response_code($httpCode);
         header('Content-Type: application/json');
-        echo json_encode(['error_message' => $message]);
+        echo json_encode(['error'=> 'Andrii API\'s Exception', 'error_message' => $message]);
     }
 }
 
