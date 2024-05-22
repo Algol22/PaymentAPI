@@ -61,7 +61,7 @@ The request body should be sent as raw JSON. Below is the structure of the JSON 
 ```
 
 
-#### Decline Reason
+#### Decline Reason Internal API
 ```json
 {
     "error": "Andrii API's Exception",
@@ -69,7 +69,7 @@ The request body should be sent as raw JSON. Below is the structure of the JSON 
 }
 ```
 
-#### Decline Reason
+#### Decline Reason External API
 ```json
 {
     "error": "External API's Exception",
