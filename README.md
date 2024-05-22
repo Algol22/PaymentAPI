@@ -1,6 +1,7 @@
 ##### Docker php + Apache images <br/>
 
-`0.92% duplicated lines out of 123922 total lines of code.`
+#### PHP Copy Paste Detector (PHPCPD)
+`0.92% duplicated lines out of 123922 total lines of code.` <br/>
 `Average size of duplication is 45 lines, largest clone has 131 of lines`
 
 
