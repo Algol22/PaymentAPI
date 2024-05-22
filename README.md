@@ -64,15 +64,16 @@ The request body should be sent as raw JSON. Below is the structure of the JSON 
 #### Decline Reason
 ```json
 {
-    "error_code": 204007,
-    "error_message": "Day MID limit is not set or exceeded."
+    "error": "Andrii API's Exception",
+    "error_message": "Missing required field: order_currency"
 }
 ```
 
 #### Decline Reason
 ```json
 {
+    "error": "External API's Exception",
     "error_code": 100000,
-    "error_message": "client_key: This is not a valid UUID."
+    "error_message": "order_currency: This value is not valid."
 }
 ```
