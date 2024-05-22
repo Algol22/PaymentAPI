@@ -2,6 +2,7 @@
 require_once '../DataModel/PayerData.php';
 require_once 'OrderGenerator.php';
 require_once 'HashGenerator.php';
+require_once 'ProcessErrorResponse.php';
 require_once 'CurlFormattedRequest.php';
 require_once '../api/PaymentResponse.php';
 require_once '../Config/config.php';
@@ -57,40 +58,8 @@ class RequestSender
 
 
             if (!$response->getRequestStatus()) {
-
                 header('Content-Type: application/json');
-
-
-
-                $responseJson = $response->getDeclineReason(); // Assuming getDeclineReason() returns JSON string
-
-
-                $responseArray = json_decode($responseJson, true);
-
-
-                $responseProcessed = [];
-
-                if ($responseArray !== null && isset($responseArray['error_code']) && isset($responseArray['error_message'])) {
-                    // Check if "errors" array is present and not empty
-                    if (isset($responseArray['errors']) && !empty($responseArray['errors'])) {
-                        // Extract error details from the first error in the "errors" array
-                        $errorCode = $responseArray['errors'][0]['error_code'];
-                        $errorMessage = $responseArray['errors'][0]['error_message'];
-                    } else {
-                        // Extract error details from the main response
-                        $errorCode = $responseArray['error_code'];
-                        $errorMessage = $responseArray['error_message'];
-                    }
-                    // Add the error details to the response array
-                    $responseProcessed['error_code'] = $errorCode;
-                    $responseProcessed['error_message'] = $errorMessage;
-                }
-
-
-                $jsonResponseProcessed = json_encode($responseProcessed);
-
-
-                echo $jsonResponseProcessed;
+                echo processErrorResponse($response->getDeclineReason());
 
             } else {
 
