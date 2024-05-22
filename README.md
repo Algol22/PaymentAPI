@@ -1,4 +1,4 @@
-##### Docker php + Apache images <br/>
+##### Docker php + Apache images - the php:apache image includes both PHP and Apache, pre-configured to work together. <br/>
 
 #### Запуск unix:
 ` docker run -d -p 8080:80 --name my-apache-php-app -v "$PWD":/var/www/html php:apache `
